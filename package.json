@@ -1,0 +1,9 @@
+{
+  "name": "calculator-cli",
+  "version": "1.0.0",
+  "description": "Practice building a command-line app in js",
+  "main": "index.js",
+  "repository": "https://github.com/sakwok/node_cli_practice",
+  "author": "spencer <s3.kwok@gmail.com>",
+  "license": "MIT"
+}
