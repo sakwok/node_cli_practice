@@ -2,8 +2,25 @@
   "name": "calculator-cli",
   "version": "1.0.0",
   "description": "Practice building a command-line app in js",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/sakwok/node_cli_practice",
   "author": "spencer <s3.kwok@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "clear": "^0.1.0",
+    "figlet": "^1.5.0",
+    "inquirer": "^8.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2"
+  }
 }
