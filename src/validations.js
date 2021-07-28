@@ -8,8 +8,15 @@ const logError = error => {
   console.error(chalk.red(error));
 };
 
+const validateFractionPart = letter => {
+  const rgx = /^\d+$|\_/;
+  return !!letter.match(rgx);
+};
+
+//  Todo: clean up regex
 const validateNumber = answer => {
-  const rgx = /^\d+$|^[0-9]+\_?[0-9]*\/{1}[1-9]+$|^[0-9]*\/{1}[1-9]$/;
+  const rgx =
+    /^\d+$|^-?[1-9]\d+$|^[0-9]+\_?[0-9]+\/{1}[1-9]+$|^[0-9]+\/{1}[1-9]+$|^-?[1-9]+\_?[0-9]+\/{1}[1-9]+$|^-?[1-9]+\/{1}[1-9]+/;
   return !!answer.match(rgx);
 };
 
@@ -214,6 +221,9 @@ const validateExpressionItemList = (expressionItemList, answer) => {
 // consoles error message and portion that errors out
 // return boolean valid
 const validate = answer => {
+  if (answer === "exit") {
+    return true;
+  }
   const { valid: hasvalidateParens, invalidIndex: invalidateParensIndex } =
     validateParens(answer);
 
@@ -233,6 +243,7 @@ module.exports = {
   logError,
   validate,
   validateExpressionItemList,
+  validateFractionPart,
   validateNumber,
   validateOperator,
   validateParens,

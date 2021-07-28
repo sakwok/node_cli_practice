@@ -3,9 +3,14 @@ const {
   validateExpressionItemList,
 } = require("../../src/validations");
 
-jest.spyOn(console, "error");
-
 describe("Find Current Expression", () => {
+  beforeAll(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+  afterAll(() => {
+    console.error.mockRestore();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -35,9 +40,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operator before item at index 6"
-    );
+    expect(console.error.mock.calls[0][0].includes("6")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operator")).toEqual(true);
   });
 
   it("returns false when single operator", () => {
@@ -47,9 +51,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operand before item at index 0"
-    );
+    expect(console.error.mock.calls[0][0].includes("0")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operand")).toEqual(true);
   });
 
   it("returns false when expression starts with operator", () => {
@@ -59,9 +62,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operand before item at index 0"
-    );
+    expect(console.error.mock.calls[0][0].includes("0")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operand")).toEqual(true);
   });
 
   it("returns false when expression ends with operator", () => {
@@ -71,9 +73,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operand after item at index 4"
-    );
+    expect(console.error.mock.calls[0][0].includes("4")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operand")).toEqual(true);
   });
 
   it("returns false when expression has multiple operators in a row", () => {
@@ -83,9 +84,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operand before item at index 6"
-    );
+    expect(console.error.mock.calls[0][0].includes("6")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operand")).toEqual(true);
   });
 
   it("returns true when single item with parens", () => {
@@ -113,9 +113,10 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please fix Invalid Expression starting @ index 1"
-    );
+    expect(console.error.mock.calls[0][0].includes("1")).toEqual(true);
+    expect(
+      console.error.mock.calls[0][0].includes("Invalid Expression")
+    ).toEqual(true);
   });
 
   it("returns false when no space between close parens and operand", () => {
@@ -125,9 +126,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Space after item at index 6"
-    );
+    expect(console.error.mock.calls[0][0].includes("6")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Space")).toEqual(true);
   });
 
   it("returns false when no space between open parens and operand", () => {
@@ -137,9 +137,10 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please fix Invalid Expression starting @ index 2"
-    );
+    expect(console.error.mock.calls[0][0].includes("2")).toEqual(true);
+    expect(
+      console.error.mock.calls[0][0].includes("Invalid Expression")
+    ).toEqual(true);
   });
 
   it("returns false when no space between two parens expressions", () => {
@@ -149,9 +150,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Space after item at index 2"
-    );
+    expect(console.error.mock.calls[0][0].includes("2")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Space")).toEqual(true);
   });
 
   it("returns false when no operator between two parens expressions", () => {
@@ -161,9 +161,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operator before item at index 4"
-    );
+    expect(console.error.mock.calls[0][0].includes("4")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operator")).toEqual(true);
   });
 
   it("returns false when no space between number first and parens", () => {
@@ -173,9 +172,10 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please fix Invalid Expression starting @ index 0"
-    );
+    expect(console.error.mock.calls[0][0].includes("0")).toEqual(true);
+    expect(
+      console.error.mock.calls[0][0].includes("Invalid Expression")
+    ).toEqual(true);
   });
 
   it("returns false when no operator between number first and parenss", () => {
@@ -185,9 +185,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operator before item at index 2"
-    );
+    expect(console.error.mock.calls[0][0].includes("2")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operator")).toEqual(true);
   });
 
   it("returns false when no space between parens first and number", () => {
@@ -197,9 +196,8 @@ describe("Find Current Expression", () => {
       false
     );
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Space after item at index 6"
-    );
+    expect(console.error.mock.calls[0][0].includes("6")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Space")).toEqual(true);
   });
 
   it("returns false when no operator between parens first and number", () => {
@@ -208,9 +206,9 @@ describe("Find Current Expression", () => {
     expect(validateExpressionItemList(currentExpressionItemList, input)).toBe(
       false
     );
+
     expect(console.error.mock.calls.length).toBe(1);
-    expect(console.error.mock.calls[0][0]).toBe(
-      "\n Please add a Operator after item at index 6"
-    );
+    expect(console.error.mock.calls[0][0].includes("6")).toEqual(true);
+    expect(console.error.mock.calls[0][0].includes("Operator")).toEqual(true);
   });
 });

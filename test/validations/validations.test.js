@@ -155,12 +155,32 @@ describe("Valid numbers", () => {
     expect(validateNumber("21312321")).toBe(true);
   });
 
+  it("returns true if negative whole number", () => {
+    expect(validateNumber("-21312321")).toBe(true);
+  });
+
+  it("returns true if negative fraction", () => {
+    expect(validateNumber("-2131/32")).toBe(true);
+  });
+
+  it("returns true if negative whole number and fraction", () => {
+    expect(validateNumber("-52_2131/32")).toBe(true);
+  });
+
   it("returns true if fraction", () => {
     expect(validateNumber("5/3")).toBe(true);
   });
 
   it("returns true if whole number with fraction", () => {
     expect(validateNumber("53_5/3")).toBe(true);
+  });
+
+  it("returns false if negative 0", () => {
+    expect(validateNumber("-0")).toBe(false);
+  });
+
+  it("returns false if negative fraction when it has whole number", () => {
+    expect(validateNumber("435_-32/5")).toBe(false);
   });
 
   it("returns false if contains non digits", () => {
