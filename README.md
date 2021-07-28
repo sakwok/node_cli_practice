@@ -81,4 +81,5 @@ Then I faced the challenge of actually combining all operands together while abi
 - Adding more test coverage, testing client logic
 - Cleaning up validation rules and negative logic
 - Improving calculator to not rely on recursion
-- Adding more functionality such as exponents,
+- Adding more functionality such as exponents
+- Handle big int
