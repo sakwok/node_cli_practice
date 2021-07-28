@@ -20,7 +20,7 @@ yarn
 
 ```
 npm start
-#or
+# or
 yarn start
 ```
 
@@ -28,7 +28,7 @@ yarn start
 
 ```
 exit
-#or
+# or
 ctrl-C
 ```
 
@@ -36,7 +36,7 @@ ctrl-C
 
 ```
 npm test
-#or
+# or
 yarn test
 ```
 
