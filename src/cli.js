@@ -2,12 +2,14 @@ const chalk = require("chalk");
 const clear = require("clear");
 const figlet = require("figlet");
 const inquirer = require("inquirer");
+const { validate } = require("./validations");
+const { calculate } = require("./math");
 
 const calculateQuestion = {
   type: "input",
   name: "calculate",
   message: "Please enter the mathematical expression you wish to evaluate",
-  validate: () => false,
+  validate,
 };
 
 const commandPrompt = async loop => {
@@ -17,10 +19,11 @@ const commandPrompt = async loop => {
     if (answer.calculate === "exit") {
       loop.continue = false;
     } else {
-      console.log(answer);
+      const result = calculate(answer.calculate.split("").reverse());
+      console.log(chalk.greenBright(result));
     }
   } catch (e) {
-    console.log(chalk.red(e));
+    console.error(chalk.red(e));
   }
 };
 
