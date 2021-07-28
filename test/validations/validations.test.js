@@ -159,6 +159,10 @@ describe("Valid numbers", () => {
     expect(validateNumber("-21312321")).toBe(true);
   });
 
+  it("returns true if negative whole single number", () => {
+    expect(validateNumber("-5")).toBe(true);
+  });
+
   it("returns true if negative fraction", () => {
     expect(validateNumber("-2131/32")).toBe(true);
   });
